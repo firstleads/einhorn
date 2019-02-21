@@ -176,10 +176,10 @@ module Einhorn
     $stderr.flush
     self.send_tagged_message(tag, msg) if tag
   end
-  def self.log_error(msg, tag=nil)
-    $stderr.puts("#{log_tag} ERROR: #{msg}\n") if Einhorn::State.verbosity <= 2
+  def self.log_error(msg, tag=nil, *args)
+    $stderr.puts("#{log_tag} ERROR: #{msg}#{args.length > 0 ? '' : ', ARGS:' + args.inspect}\n") if Einhorn::State.verbosity <= 2
     $stderr.flush
-    self.send_tagged_message(tag, "ERROR: #{msg}") if tag
+    self.send_tagged_message(tag, "ERROR: #{msg}", *args) if tag
   end
 
   def self.send_tagged_message(tag, message, last=false)

@@ -240,7 +240,7 @@ module Einhorn
       write.close
 
       unless Einhorn.can_safely_reload?
-        Einhorn.log_error("Can not initiate einhorn master reload safely, aborting", :reload)
+        Einhorn.log_error("Can not initiate einhorn master reload safely, aborting", :reload, last = true)
         Einhorn::State.reloading_for_upgrade = false
         read.close
         return
